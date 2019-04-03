@@ -13,7 +13,6 @@ module.exports = (req, res, next) => {
       if(error) {
         res.status(401).json({ message: 'Invalid Creds' })
       } else {
-        //all good
         req.decodedJwt = decodedToken;
         next();
       }
@@ -21,22 +20,4 @@ module.exports = (req, res, next) => {
   } else {
     res.status(401).json({ message: 'No token provided' })
   }
-  // just checking for token - remove username and password check
-
-  // if (username && password) {
-  //   Users.findBy({ username })
-  //     .first()
-  //     .then(user => {
-  //       if (user && bcrypt.compareSync(password, user.password)) {
-  //         next();
-  //       } else {
-  //         res.status(401).json({ message: 'Invalid Credentials' });
-  //       }
-  //     })
-  //     .catch(error => {
-  //       res.status(500).json({ message: 'Ran into an unexpected error' });
-  //     });
-  // } else {
-  //   res.status(400).json({ message: 'No credentials provided' });
-  // }
 };
