@@ -18,5 +18,13 @@
   "bugs": {
     "url": "https://github.com/dislersd/webauth-challenge-3/issues"
   },
-  "homepage": "https://github.com/dislersd/webauth-challenge-3#readme"
+  "homepage": "https://github.com/dislersd/webauth-challenge-3#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.5",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "helmet": "^3.16.0",
+    "jsonwebtoken": "^8.5.1",
+    "sqlite3": "^4.0.6"
+  }
 }
