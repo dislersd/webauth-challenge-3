@@ -1,5 +1,6 @@
 import React, { useReducer } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const AddProjectForm = styled.form`
   width: 90%;
@@ -55,7 +56,6 @@ const AddProjectForm = styled.form`
   }
 
   button {
-    border: 1px solid #495267;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -67,20 +67,20 @@ const AddProjectForm = styled.form`
     text-shadow: 0px 0px 0 rgba(0, 0, 0, 0.3);
     font-weight: bold;
     color: #ffffff;
-    background-color: #606c88;
+    background-color: #5d9afc;
     background-image: -webkit-gradient(
       linear,
       left top,
       left bottom,
-      from(#606c88),
-      to(#3f4c6b)
+      from(#5d9afc),
+      to(#5d9afc)
     );
-    background-image: -webkit-linear-gradient(top, #606c88, #3f4c6b);
-    background-image: -moz-linear-gradient(top, #606c88, #3f4c6b);
-    background-image: -ms-linear-gradient(top, #606c88, #3f4c6b);
-    background-image: -o-linear-gradient(top, #606c88, #3f4c6b);
-    background-image: linear-gradient(to bottom, #606c88, #3f4c6b);
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#606c88, endColorstr=#3f4c6b);
+    background-image: -webkit-linear-gradient(top, #5d9afc, #3c86fc);
+    background-image: -moz-linear-gradient(top, #5d9afc, #3c86fc);
+    background-image: -ms-linear-gradient(top, #5d9afc, #3c86fc);
+    background-image: -o-linear-gradient(top, #5d9afc, #3c86fc);
+    background-image: linear-gradient(to bottom, #5d9afc, #3c86fc);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#5d9afc, endColorstr=#3c86fc);
     transition: all 0.5s ease;
 
     &:hover {
@@ -89,13 +89,14 @@ const AddProjectForm = styled.form`
   }
 `;
 
-const Login = props => {
+const Login = () => {
   // using reducer for multiple input value control
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
-      userName: "",
-      password: ""
+      username: "",
+      password: "",
+      department: ""
     }
   );
 
@@ -103,19 +104,15 @@ const Login = props => {
     <div>
       <AddProjectForm
         onSubmit={e =>
-          props.handleSubmit(
-            e,
-            `${userInput.userName}`,
-            `${userInput.password}`
-          )
+          handleSubmit(e, `${userInput.username}`, `${userInput.password}`)
         }
         autoComplete="off"
       >
         <input
           type="text"
-          name="userName"
-          value={userInput.userName}
-          placeholder="Username..."
+          name="username"
+          value={userInput.username}
+          placeholder="username..."
           onChange={handleChange}
         />
         <input
@@ -127,22 +124,32 @@ const Login = props => {
         />
         <button type="submit" value="add">
           {" "}
-          Add{" "}
+          Login{" "}
         </button>
       </AddProjectForm>
     </div>
   );
 
-  function handleChange (event) {
+  function handleChange(event) {
     const { name, value } = event.target;
     setUserInput({ [name]: value });
-  };
-
-  function handleSubmit (event) {
-    event.preventDefault();
-    
   }
 
+  async function handleSubmit(event, username, password) {
+    event.preventDefault();
+    try {
+      const creds = {
+        username,
+        password
+      };
+      console.log(creds);
+      const endpoint = "http://localhost:4000/api/auth/login";
+      const res = await axios.post(endpoint, creds);
+      console.log(res);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 };
 
 export default Login;
