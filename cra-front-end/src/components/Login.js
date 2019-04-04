@@ -141,9 +141,9 @@ const Login = () => {
         username,
         password
       };
-      console.log(creds);
-      const endpoint = "http://localhost:4000/api/auth/login";
+      const endpoint = "/auth/login";
       const res = await axios.post(endpoint, creds);
+      console.log({status: res.status, message: 'logged in! 💯'})
       localStorage.setItem("token", res.data.token)
     } catch (error) {
       console.log(error.message);
