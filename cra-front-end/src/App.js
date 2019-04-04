@@ -13,8 +13,29 @@ const AppWrapper = styled.div`
 
 class App extends Component {
   render() {
-    return <AppWrapper>hello</AppWrapper>;
+    return (
+      <>
+        <header>
+          <NavLink to="/">Home</NavLink>
+          &nbsp;|&nbsp;
+          <NavLink to="/login">Login</NavLink>
+          &nbsp;|&nbsp;
+          <NavLink to="/">Users</NavLink>
+        </header>
+        <main>
+          <AppWrapper>
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/users" component={Users} />
+          </AppWrapper>
+        </main>
+      </>
+    );
   }
+}
+
+const Home = () => {
+  return <h1>Home</h1>
 }
 
 export default App;
