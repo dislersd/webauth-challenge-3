@@ -10,7 +10,7 @@ const AddProjectForm = styled.form`
   justify-content: space-between;
   align-items: center;
   padding: 30px;
-  background-color: #f8f8f8;
+  background-color: #ffcdaa;
   border-radius: 10px;
 
   input {
