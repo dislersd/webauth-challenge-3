@@ -89,13 +89,14 @@ const AddProjectForm = styled.form`
   }
 `;
 
-const Login = () => {
+const SignUp = () => {
   // using reducer for multiple input value control
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
       username: "",
-      password: ""
+      password: "",
+      department: ""
     }
   );
 
@@ -103,7 +104,12 @@ const Login = () => {
     <div>
       <AddProjectForm
         onSubmit={e =>
-          handleSubmit(e, `${userInput.username}`, `${userInput.password}`)
+          handleSubmit(
+            e,
+            `${userInput.username}`,
+            `${userInput.password}`,
+            `${userInput.department}`
+          )
         }
         autoComplete="off"
       >
@@ -121,9 +127,16 @@ const Login = () => {
           placeholder="Password..."
           onChange={handleChange}
         />
+        <input
+          type="text"
+          name="department"
+          value={userInput.department}
+          placeholder="department..."
+          onChange={handleChange}
+        />
         <button type="submit" value="add">
           {" "}
-          Login{" "}
+          Sign Up{" "}
         </button>
       </AddProjectForm>
     </div>
@@ -134,21 +147,22 @@ const Login = () => {
     setUserInput({ [name]: value });
   }
 
-  async function handleSubmit(event, username, password) {
+  async function handleSubmit(event, username, password, department) {
     event.preventDefault();
     try {
       const creds = {
         username,
-        password
+        password,
+        department
       };
       console.log(creds);
-      const endpoint = "http://localhost:4000/api/auth/login";
+      const endpoint = "http://localhost:4000/api/auth/register";
       const res = await axios.post(endpoint, creds);
-      localStorage.setItem("token", res.data.token)
+      console.log(res);
     } catch (error) {
       console.log(error.message);
     }
   }
 };
 
-export default Login;
+export default SignUp;
