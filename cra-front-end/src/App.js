@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import "./App.css";
 import styled from "styled-components";
 import { Route, NavLink } from "react-router-dom";
+import "./App.css";
+
+import Users from "./components/Users";
+import Login from "./components/Login";
 
 const AppWrapper = styled.div`
   display: flex;
@@ -14,28 +17,26 @@ const AppWrapper = styled.div`
 class App extends Component {
   render() {
     return (
-      <>
+      <AppWrapper>
         <header>
           <NavLink to="/">Home</NavLink>
           &nbsp;|&nbsp;
           <NavLink to="/login">Login</NavLink>
           &nbsp;|&nbsp;
-          <NavLink to="/">Users</NavLink>
+          <NavLink to="/users">Users</NavLink>
         </header>
         <main>
-          <AppWrapper>
-            <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/users" component={Users} />
-          </AppWrapper>
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={Login} />
+          <Route path="/users" component={Users} />
         </main>
-      </>
+      </AppWrapper>
     );
   }
 }
 
 const Home = () => {
-  return <h1>Home</h1>
-}
+  return <h1>Home</h1>;
+};
 
 export default App;
