@@ -27,7 +27,8 @@ const AppWrapper = styled.div`
     font-weight: bold;
     color: black;
     background-color: none;
-    transition: all 0.5s ease;
+    transition: all 0.2s ease;
+    margin: 0 10px;
 
     &:hover {
       background-color: #79beff;
@@ -65,6 +66,7 @@ const AppWrapper = styled.div`
     color: black;
     background-color: none;
     transition: all 0.5s ease;
+    margin: 0 10px;
 
     &:hover {
       background-color: #ff907a;
@@ -72,18 +74,18 @@ const AppWrapper = styled.div`
   }
 `;
 
-const App = () => {
+const App = props => {
   return (
     <AppWrapper>
       <header>
         <NavLink to="/">Home</NavLink>
-        &nbsp;|&nbsp;
+        
         <NavLink to="/signup">Sign Up</NavLink>
-        &nbsp;|&nbsp;
+        
         <NavLink to="/login">Login</NavLink>
-        &nbsp;|&nbsp;
+        
         <NavLink to="/users">Users</NavLink>
-        &nbsp;|&nbsp;
+        
         <button className="logout" onClick={logout}>
           Logout
         </button>
@@ -97,7 +99,8 @@ const App = () => {
       </main>
     </AppWrapper>
   );
-  function logout() {
+
+  function logout (props) {
     localStorage.removeItem("token");
   }
 };

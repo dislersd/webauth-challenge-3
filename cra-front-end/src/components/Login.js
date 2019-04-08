@@ -89,7 +89,7 @@ const AddProjectForm = styled.form`
   }
 `;
 
-const Login = () => {
+const Login = (props) => {
   // using reducer for multiple input value control
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -102,9 +102,7 @@ const Login = () => {
   return (
     <div>
       <AddProjectForm
-        onSubmit={e =>
-          handleSubmit(e, `${userInput.username}`, `${userInput.password}`)
-        }
+        onSubmit={e => handleSubmit(e, userInput.username, userInput.password)}
         autoComplete="off"
       >
         <input
@@ -143,8 +141,9 @@ const Login = () => {
       };
       const endpoint = "/auth/login";
       const res = await axios.post(endpoint, creds);
-      console.log({status: res.status, message: 'logged in! 💯'})
-      localStorage.setItem("token", res.data.token)
+      console.log({ status: res.status, message: "logged in! 💯" });
+      localStorage.setItem("token", res.data.token);
+      props.history.push('/users')
     } catch (error) {
       console.log(error.message);
     }
